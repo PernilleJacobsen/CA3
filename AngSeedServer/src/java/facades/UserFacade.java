@@ -1,38 +1,68 @@
 package facades;
 
-import entity.User;
+import entity.Users;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-public class UserFacade {
-  
-  private final  Map<String, User> users = new HashMap<>();
+public class UserFacade
+{
 
-  public UserFacade() {
-    //Test Users
-    User user = new User("user","test");
-    user.AddRole("User");
-    users.put(user.getUserName(),user );
-    User admin = new User("admin","test");
-    admin.AddRole("Admin");
-    users.put(admin.getUserName(),admin);
-    
-    User both = new User("user_admin","test");
-    both.AddRole("User");
-    both.AddRole("Admin");
-    users.put(both.getUserName(),both );
-  }
-  
-  public User getUserByUserId(String id){
-    return users.get(id);
-  }
-  /*
-  Return the Roles if users could be authenticated, otherwise null
-  */
-  public List<String> authenticateUser(String userName, String password){
-    User user = users.get(userName);
-    return user != null && user.getPassword().equals(password) ? user.getRoles(): null;
-  }
-  
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+//  private final  Map<String, Users> users = new HashMap<>();
+
+    public UserFacade()
+    {
+        //Test Users
+//    Users user = new Users("user","test");
+//    user.AddRole("Users");
+//    users.put(user.getUserName(),user );
+//    Users admin = new Users("admin","test");
+//    admin.AddRole("Admin");
+//    users.put(admin.getUserName(),admin);
+//    
+//    Users both = new Users("user_admin","test");
+//    both.AddRole("Users");
+//    both.AddRole("Admin");
+//    users.put(both.getUserName(),both );
+    }
+
+    EntityManager getEntityManager()
+    {
+        return emf.createEntityManager();
+    }
+
+    public Users saveUser(Users user)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+            return em.find(Users.class, user.getUserName());
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    public Users getUserByUserId(String userName)
+    {
+        EntityManager em = getEntityManager();
+        return em.find(Users.class, userName);
+    }
+    /*
+     Return the Roles if users could be authenticated, otherwise null
+     */
+
+    public List<String> authenticateUser(String userName, String password)
+    {
+        Users user = getUserByUserId(userName);
+        return user != null && user.getPassword().equals(password) ? user.getRoles() : null;
+    }
+
 }
