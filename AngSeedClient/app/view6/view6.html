@@ -1,4 +1,4 @@
-<form class="navbar-form navbar-middle" role="form" submit="saveUser()"  >
+<form class="navbar-form navbar-middle" role="form" ng-submit="saveUser()">
               <div class="form-group">
                 <input type="text" style="width:12em;" placeholder="User name" class="form-control"
                        ng-model="user.username">
@@ -9,3 +9,5 @@
               </div>
               <button type="submit" class="btn btn-success">Create User</button>
             </form>
+
+<div>{{message}}</div>
