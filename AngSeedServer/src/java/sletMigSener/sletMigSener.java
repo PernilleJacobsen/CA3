@@ -28,7 +28,7 @@ public class sletMigSener
         f.saveUser(u);
         
         Users a = new Users("admin","test");
-        a.AddRole("admin");
+        a.AddRole("Admin");
         f.saveUser(a);
     }
 }
