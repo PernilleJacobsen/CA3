@@ -1,5 +1,6 @@
 package facades;
 
+import deploy.DeploymentConfiguration;
 import entity.Users;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,8 @@ import javax.persistence.Persistence;
 public class UserFacade
 {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
+
 //  private final  Map<String, Users> users = new HashMap<>();
 
     public UserFacade()
