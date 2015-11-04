@@ -1,31 +1,28 @@
-<p>This is the partial for view 2.</p>
-<div>
-  <p>Data from server (Users ONLY) <b style="color: darkblue">{{data}}</b></p>
-</div>
-<br>
-<input type="text" ng-model="searchText">
-
-<select name="Options" size="5" ng-model="options">
+Search Text: <input type="text" ng-model="searchText">
+Options: <select name="Options" ng-model="options">
     <option value="normal">Normal</option>
-    <option value="cvr">CVR</option>
+    <option value="vat">CVR</option>
     <option value="name">Name</option>
     <option value="production">Production</option>
     <option value="phonenumber">Phone number</option>  
 </select>
-<select name="Country" size="2" ng-model="country">
+Country: <select name="Country" ng-model="country">
     <option value="dk">DK</option>
     <option value="no">NO</option>
 </select>
-<input type="submit" value="search" name="Search" ng-click="$scope.getCompany()"/>
-<table>    
-                <thead> 
-                <th>Company Name:&nbsp; &nbsp; </th>
-                <th>CVR:&nbsp; &nbsp; </th>
-                </thead>
+<input type="submit" value="search" name="Search" ng-click="getCompany()"/>
+<br>
+<br>
+<table class="table">    
+    <thead> 
+    <th>Company Name:&nbsp; &nbsp; </th>
+    <th>CVR:&nbsp; &nbsp; </th>
+</thead>
+<tbody>
+    <tr>
+        <td>{{data.name}} </td>
+        <td>{{data.vat}} </td>
 
-                <tr data-ng-repeat="data in $scope.data">
-                    <td>{{data.name}} </td>
-                    <td>{{data.vat}} </td>
-                  
-                </tr>
-            </table>
+    </tr>
+</tbody>
+</table>

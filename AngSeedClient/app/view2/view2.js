@@ -19,15 +19,14 @@ angular.module('myApp.view2', ['ngRoute'])
                 $scope.error = res.status + ": " + res.data.statusText;
             });
 
-            $scope.getCompany = function ($http, $scope) {
-                var turl = 'http://cvrapi.dk/api?';
-                var ourl = $scope.options + "=" + $scope.searchText + "&country=" + $scope.country;
-                var finalurl = turl + ourl;
-                $http.get(finalurl).then(function successCallback(res) {
-                    $scope.data = res.data.message;
+            $scope.getCompany = function () {
+                alert($scope.options);
+                var url = 'api/getCompany/'+$scope.options + "/" + $scope.searchText + "/" + $scope.country;
+                $http.get(url).then(function successCallback(res) {
+                    $scope.data = res.data;
                 }, function errorCallback(res) {
-                    $scope.error = res.status + ": " + res.data.statusText;
-                });
+                $scope.error = res.status + ": " + res.data.statusText;
+            });
             };
 
         });
