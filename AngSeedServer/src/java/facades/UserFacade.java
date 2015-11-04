@@ -2,12 +2,15 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.Users;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import security.PasswordHash;
 
 public class UserFacade
 {
@@ -37,9 +40,11 @@ public class UserFacade
         return emf.createEntityManager();
     }
 
-    public Users saveUser(Users user)
+    public Users saveUser(Users user) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         EntityManager em = getEntityManager();
+        String hashedPassword = PasswordHash.createHash(user.getPassword());
+        user.setPassword(hashedPassword);
         try
         {
             em.getTransaction().begin();
@@ -61,10 +66,10 @@ public class UserFacade
      Return the Roles if users could be authenticated, otherwise null
      */
 
-    public List<String> authenticateUser(String userName, String password)
+    public List<String> authenticateUser(String userName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         Users user = getUserByUserId(userName);
-        return user != null && user.getPassword().equals(password) ? user.getRoles() : null;
+        return user != null && PasswordHash.validatePassword(password, user.getPassword()) ? user.getRoles() :null;
     }
 
 }

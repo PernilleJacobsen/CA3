@@ -7,6 +7,8 @@ package sletMigSener;
 
 import entity.Users;
 import facades.UserFacade;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,16 +19,16 @@ import javax.persistence.Persistence;
  */
 public class sletMigSener
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
-        EntityManager em = emf.createEntityManager();
-        
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+//        EntityManager em = emf.createEntityManager();
+//        
         UserFacade f = new UserFacade();
-        Users u = new Users("user", "test");
-        u.AddRole("User");
-        f.saveUser(u);
-        
+//        Users u = new Users("user", "test");
+//        u.AddRole("User");
+//        f.saveUser(u);
+//        
         Users a = new Users("admin","test");
         a.AddRole("Admin");
         f.saveUser(a);

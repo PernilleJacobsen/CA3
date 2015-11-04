@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Users;
 import facades.UserFacade;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,7 +20,7 @@ public class SaveUsers
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveUser(String user)
+    public Response saveUser(String user) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         JsonObject json = new JsonParser().parse(user).getAsJsonObject();
         Users u = new Users();
