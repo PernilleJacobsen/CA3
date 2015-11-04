@@ -21,18 +21,7 @@ public class UserFacade
 
     public UserFacade()
     {
-        //Test Users
-//    Users user = new Users("user","test");
-//    user.AddRole("Users");
-//    users.put(user.getUserName(),user );
-//    Users admin = new Users("admin","test");
-//    admin.AddRole("Admin");
-//    users.put(admin.getUserName(),admin);
-//    
-//    Users both = new Users("user_admin","test");
-//    both.AddRole("Users");
-//    both.AddRole("Admin");
-//    users.put(both.getUserName(),both );
+        
     }
 
     EntityManager getEntityManager()
@@ -70,6 +59,23 @@ public class UserFacade
     {
         Users user = getUserByUserId(userName);
         return user != null && PasswordHash.validatePassword(password, user.getPassword()) ? user.getRoles() :null;
+    }
+    
+    public List<Users> getAllUsers()
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            List<Users> users= em.createQuery("SELECT u FROM Users").getResultList();
+            em.getTransaction().commit();
+            return users;
+            
+        }finally
+        {
+            em.close();
+        }
+        
     }
 
 }

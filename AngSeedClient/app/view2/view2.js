@@ -20,7 +20,6 @@ angular.module('myApp.view2', ['ngRoute'])
             });
 
             $scope.getCompany = function () {
-                alert($scope.options);
                 var url = 'api/getCompany/'+$scope.options + "/" + $scope.searchText + "/" + $scope.country;
                 $http.get(url).then(function successCallback(res) {
                     $scope.data = res.data;
