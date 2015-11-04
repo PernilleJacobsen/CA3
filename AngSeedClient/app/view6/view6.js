@@ -9,12 +9,9 @@ angular.module('myApp.view6', ['ngRoute'])
                 });
             }])
         .controller('View6Ctrl', function ($scope, $http) {
-            $scope.message = "hej";
             $scope.saveUser = function () {
-                alert('aloha');
                 $http.post('api/saveUser', $scope.user).
                         success(function () {
-                            alert('hej');
                         });
             };
         });
