@@ -15,14 +15,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("admin")
+@Path("admin/")
 @RolesAllowed("Admin")
 public class Admin
 {
     Gson gson= new Gson();
     
     @GET
-    @Path("/users")
+    @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public String getSomething()
     {

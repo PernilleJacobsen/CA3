@@ -67,7 +67,7 @@ public class UserFacade
         try
         {
             em.getTransaction().begin();
-            List<Users> users= em.createQuery("SELECT u FROM Users").getResultList();
+            List<Users> users= em.createQuery("SELECT u FROM Users u").getResultList();
             em.getTransaction().commit();
             return users;
             

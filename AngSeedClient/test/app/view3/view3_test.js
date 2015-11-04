@@ -7,7 +7,7 @@ describe('myApp.view3 view3Ctrl', function () {
 
   beforeEach(inject(function ($httpBackend, $rootScope, $controller) {
     httpBackendMock = $httpBackend;
-    httpBackendMock.expectGET('api/demoadmin').respond(testResponse);
+    httpBackendMock.expectGET('api/admin').respond(testResponse);
     scope = $rootScope.$new();
     ctrl = $controller('View3Ctrl', {$scope: scope});
   }));
