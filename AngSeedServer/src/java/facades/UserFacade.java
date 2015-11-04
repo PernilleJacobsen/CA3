@@ -74,8 +74,22 @@ public class UserFacade
         }finally
         {
             em.close();
+        } 
+    }
+    
+    public void deleteUser(String username)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            em.remove(username);
+            em.getTransaction().commit();
         }
-        
+        finally
+        {
+            em.close();
+        }
     }
 
 }

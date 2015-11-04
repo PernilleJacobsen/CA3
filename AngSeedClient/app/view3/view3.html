@@ -1,14 +1,13 @@
 <table class="table">    
             <thead> 
             <th>Username: </th>
-            <th>Password: </th>
             <th>Role: </th>
         </thead>
         <tbody>
-            <tr ng-repeat="users in $scope.data">
-                <td>{{users.username}} </td>
-                <td>{{}} </td>
-
+            <tr ng-repeat="users in data">
+                <td>{{users.username}}</td>
+                <td>{{users.roles[0].role}}</td>
+                <td ng-click="delete(users.username)"><a href="">delete</a></td>
             </tr>
         </tbody>
     </table>

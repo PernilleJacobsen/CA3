@@ -2,22 +2,21 @@
 
 angular.module('myApp.view3', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view3', {
-    templateUrl: 'view3/view3.html',
-    controller: 'View3Ctrl'
-  });
-}])
+        .config(['$routeProvider', function ($routeProvider) {
+                $routeProvider.when('/view3', {
+                    templateUrl: 'view3/view3.html',
+                    controller: 'View3Ctrl'
+                });
+            }])
 
-.controller('View3Ctrl', function($http,$scope) {
-  $http.get('api/admin/users')
-            .success(function (data, status, headers, config) {
-              $scope.data = data;
-            })
-            .error(function (data, status, headers, config) {
-              
-             });
- $http.get('api/admin/users').then(function (response){
-     $scope.data = response.data;
- });
-});
+        .controller('View3Ctrl', function ($http, $scope) {
+            $http.get('api/admin/users').then(function (response) {
+                $scope.data = response.data;
+            });
+
+            $scope.delete = function (username) {
+                $http.delete('api/admin/user/' + username).then(function () {
+                    alert(username);
+                    });
+            };
+        });

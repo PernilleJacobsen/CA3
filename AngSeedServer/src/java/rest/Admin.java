@@ -10,23 +10,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import security.PasswordHash;
 
 @Path("admin/")
 @RolesAllowed("Admin")
 public class Admin
 {
-    Gson gson= new Gson();
+    Gson gson = new Gson();
+    UserFacade uf = new UserFacade();
     
     @GET
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getSomething()
+    public String getUsers()
     {
-        UserFacade uf = new UserFacade();
         List<Users> userList = uf.getAllUsers();
         JsonArray liste = new JsonArray();
         for (Users u : userList)
@@ -45,7 +49,16 @@ public class Admin
             user.add("roles", JsonStringList);
             liste.add(user);
         }
-        return gson.toJson(liste);
+        String json = gson.toJson(liste);
+        return json;
+    }
+    
+    @DELETE
+    @Path("user/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteUser(@PathParam("id") String username)
+    {
+        uf.deleteUser(username);
     }
 
 }
