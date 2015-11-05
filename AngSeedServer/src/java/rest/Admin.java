@@ -54,9 +54,9 @@ public class Admin
     }
     
     @DELETE
-    @Path("user/{id}")
+    @Path("user/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteUser(@PathParam("id") String username)
+    public void deleteUser(@PathParam("username") String username)
     {
         uf.deleteUser(username);
     }

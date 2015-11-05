@@ -82,8 +82,10 @@ public class UserFacade
         EntityManager em = getEntityManager();
         try
         {
+            
             em.getTransaction().begin();
-            em.remove(username);
+            Users user = em.find(Users.class, username);
+            em.remove(user);
             em.getTransaction().commit();
         }
         finally
