@@ -32,8 +32,8 @@ public class UserFacade
     public Users saveUser(Users user) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         EntityManager em = getEntityManager();
-        String hashedPassword = PasswordHash.createHash(user.getPassword());
-        user.setPassword(hashedPassword);
+//        String hashedPassword = PasswordHash.createHash(user.getPassword());
+//        user.setPassword(hashedPassword);
         try
         {
             em.getTransaction().begin();
@@ -55,10 +55,11 @@ public class UserFacade
      Return the Roles if users could be authenticated, otherwise null
      */
 
-    public List<String> authenticateUser(String userName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException
+    public List<String> authenticateUser(String userName, String password)
     {
         Users user = getUserByUserId(userName);
-        return user != null && PasswordHash.validatePassword(password, user.getPassword()) ? user.getRoles() :null;
+        return user != null && user.getPassword().equals(password) ? user.getRoles() : null;
+//        return user != null && PasswordHash.validatePassword(password, user.getPassword()) ? user.getRoles() :null;
     }
     
     public List<Users> getAllUsers()
