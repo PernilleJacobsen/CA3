@@ -1,5 +1,6 @@
 package rest;
 
+import exception.CompanyNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -19,7 +20,10 @@ public class getCompany {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("{options}/{searchText}/{country}")
-  public String getSomething(@PathParam("options") String options, @PathParam("searchText") String searchText, @PathParam("country") String country) throws MalformedURLException, IOException{
+  public String getSomething(@PathParam("options") String options, @PathParam("searchText") String searchText, @PathParam("country") String country) throws MalformedURLException, IOException, CompanyNotFoundException
+  {
+      try
+      {
       String urlToUse = "http://cvrapi.dk/api?" + options + "=" + searchText + "&country=" + country;
       System.out.println(urlToUse);
       URL url = new URL(urlToUse);
@@ -34,6 +38,10 @@ public class getCompany {
         scan.close();
 
         return jsonStr;
+      }catch(Exception e)
+        {
+            throw new CompanyNotFoundException("There is no company with the requested CVR number");
+        }
   }
  
 }
