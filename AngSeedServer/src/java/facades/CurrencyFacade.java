@@ -38,7 +38,10 @@ public class CurrencyFacade
             em.getTransaction().begin();
             for (Currency c : currencyList)
             {
-                em.persist(c);
+                if (c.getCode() != null)
+                {
+                    em.persist(c);
+                }
             }
             em.getTransaction().commit();
 
@@ -54,7 +57,7 @@ public class CurrencyFacade
         try
         {
             em.getTransaction().begin();
-            List<Currency> currencyList = em.createQuery("Select c from currency c").getResultList();
+            List<Currency> currencyList = em.createQuery("Select c from Currency c").getResultList();
             em.getTransaction().commit();
             return currencyList;
         } finally
@@ -62,4 +65,23 @@ public class CurrencyFacade
             em.close();
         }
     }
+
+    public Double getRate(int amount, String fromCurrency, String toCurrency)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            double dbFromCurrency = (double) em.createQuery("Select c.rate From Currency c Where c.code=:code Order by c.id DESC").setMaxResults(1).setParameter("code", fromCurrency).getSingleResult();
+            double dbToCurrency = (double) em.createQuery("Select c.rate From Currency c Where c.code=:code Order by c.id DESC").setMaxResults(1).setParameter("code", toCurrency).getSingleResult();
+            em.getTransaction().commit();
+            double result = (amount * dbFromCurrency) / dbToCurrency;
+            return result;
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+
 }
