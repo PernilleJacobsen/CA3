@@ -13,7 +13,6 @@ public class Users implements Serializable {
   private String password;  //Pleeeeease dont store me in plain text
   @Id 
   private String userName;
-  
   @ElementCollection
   List<String> roles = new ArrayList();
 

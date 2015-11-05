@@ -14,34 +14,41 @@ Country: <select name="Country" ng-model="country">
 <br>
 <br>
 <table class="table">    
-    <thead> 
-    <th>Company Name:&nbsp; &nbsp; </th>
-    <th>CVR:&nbsp; &nbsp; </th>
+    <thead>
+    <th>CVR</th>
+    <th>Company Name</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Phone</th>
+    <th>Email</th>
 </thead>
 <tbody>
     <tr>
-        <td>{{data.name}} </td>
         <td>{{data.vat}} </td>
-
+        <td>{{data.name}} </td>
+        <td>{{data.address}} </td>
+        <td>{{data.city}} {{data.zipcode}}</td>
+        <td>{{data.phone}} </td>
+        <td>{{data.email}} </td>
     </tr>
 </tbody>
 </table>
- <uib-accordion>
-        <uib-accordion-group ng-repeat="company in data.productionunits" heading={{company.name}} >
-            <table class="table">
-                <th>Address</th>
-                <th>City</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <tr>
-                    <td>{{company.address}}</td>
-                    <td>{{company.city}}</td>
-                    <td>{{company.phone}}</td>
-                    <td>{{company.email}}</td>
-                </tr>
+<uib-accordion>
+    <uib-accordion-group ng-repeat="company in data.productionunits" heading={{company.name}} >
+        <table class="table">
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <tr>
+                <td>{{company.address}}</td>
+                <td>{{company.city}}</td>
+                <td>{{company.phone}}</td>
+                <td>{{company.email}}</td>
+            </tr>
 
-            </table>
-        </uib-accordion-group>
+        </table>
+    </uib-accordion-group>
 
-    </uib-accordion>
+</uib-accordion>
 

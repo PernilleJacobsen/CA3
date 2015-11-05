@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 
 public class XmlReader extends DefaultHandler
 {
+
     private String tempDate;
     private List<Currency> currencyList = new ArrayList();
 
@@ -34,7 +35,7 @@ public class XmlReader extends DefaultHandler
     {
         this.tempDate = tempDate;
     }
-    
+
     @Override
     public void startDocument() throws SAXException
     {
@@ -81,6 +82,20 @@ public class XmlReader extends DefaultHandler
             c.setDates(getTempDate());
         }
         currencyList.add(c);
+    }
+
+    public void getNewCurrencies()
+    {
+        try
+        {
+            XMLReader xr = XMLReaderFactory.createXMLReader();
+            xr.setContentHandler(new XmlReader());
+            URL url = new URL("http://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=en");
+            xr.parse(new InputSource(url.openStream()));
+        } catch (SAXException | IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args)

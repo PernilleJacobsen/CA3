@@ -21,9 +21,6 @@ public class sletMigSener
 {
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
-        EntityManager em = emf.createEntityManager();
-        
         UserFacade f = new UserFacade();
         Users u = new Users("user", "test");
         u.AddRole("User");
