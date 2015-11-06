@@ -11,12 +11,12 @@
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="ca2"/>
       <property name="javax.persistence.sql-load-script-source" value="SQL/addData.sql"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
-    <persistence-unit name="pu_OPENSHIFT" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="pu_OPENSHIFT" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Users</class>
+    <class>entity.Currency</class>
     <non-jta-data-source>java:/comp/env/jdbc/MySQLDS</non-jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>

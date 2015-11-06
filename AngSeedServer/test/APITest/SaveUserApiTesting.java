@@ -1,32 +1,26 @@
-package test;
+package APITest;
 
 import static com.jayway.restassured.RestAssured.basePath;
 import static com.jayway.restassured.RestAssured.baseURI;
 import static com.jayway.restassured.RestAssured.defaultParser;
 import static com.jayway.restassured.RestAssured.given;
 import com.jayway.restassured.parsing.Parser;
-import static com.jayway.restassured.path.json.JsonPath.from;
+import com.jayway.restassured.response.ValidatableResponse;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import rest.ApplicationConfig;
-import static test.BackendTest.server;
 
-public class ApiTesting
+public class SaveUserApiTesting
 {
 
     static Server server;
 
-    public ApiTesting()
+    public SaveUserApiTesting()
     {
         baseURI = "http://localhost:8082";
         defaultParser = Parser.JSON;
@@ -53,25 +47,20 @@ public class ApiTesting
         //waiting for all the server threads to terminate so we can exit gracefully
         server.join();
     }
-    
+
     @Test
     public void getAllUsers()
     {
-        String json = given().
-                contentType("application/json").
-                body("{'username':'admin','password':'test'}").
-                when().
-                post("/login").
-                then().
-                statusCode(200).extract().asString();
-        //Then test /demouser URL with the correct token extracted from the JSON string.
+        String myJson = "{username : test, password :test}";
+        ValidatableResponse json = 
         given().
                 contentType("application/json").
-                header("Authorization", "Bearer " + from(json).get("token")).
+                body(myJson).
                 when().
-                get("/admin/users").
+                post("/saveUser").
                 then().
                 statusCode(200).
-                body("[]", hasItems("user, admin, both"));
-    }
-}
+                body("username", equalTo("test"));
+    }    
+} 
+    

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package APITest;
 
 import static com.jayway.restassured.RestAssured.basePath;
 import static com.jayway.restassured.RestAssured.baseURI;
