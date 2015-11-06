@@ -91,7 +91,6 @@ public class BackendTest {
                 post("/login").
                 then().
                 statusCode(200);
-
     }
 
     @Test
@@ -128,7 +127,7 @@ public class BackendTest {
                 contentType("application/json").
                 header("Authorization", "Bearer " + from(json).get("token")).
                 when().
-                get("/demoadmin").
+                get("/admin/users").
                 then().
                 statusCode(403).
                 body("error.message", equalTo("You are not authorized to perform the requested operation"));

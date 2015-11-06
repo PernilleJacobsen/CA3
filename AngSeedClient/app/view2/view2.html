@@ -1,4 +1,6 @@
-Search Text: <input type="text" ng-model="searchText">
+
+<div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+Search Text:<input type="text" ng-model="searchText">
 Options: <select name="Options" ng-model="options">
     <option value="normal">Normal</option>
     <option value="vat">CVR</option>

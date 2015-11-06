@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import security.PasswordHash;
 
-@Path("admin/")
+@Path("admin")
 @RolesAllowed("Admin")
 public class Admin
 {
@@ -27,7 +27,7 @@ public class Admin
     UserFacade uf = new UserFacade();
     
     @GET
-    @Path("users")
+    @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers()
     {
@@ -54,7 +54,7 @@ public class Admin
     }
     
     @DELETE
-    @Path("user/{username}")
+    @Path("/user/{username}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteUser(@PathParam("username") String username)
     {

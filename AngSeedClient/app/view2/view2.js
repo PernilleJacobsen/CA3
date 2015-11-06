@@ -10,21 +10,16 @@ angular.module('myApp.view2', ['ngRoute'])
             }])
 
         .controller('View2Ctrl', function ($http, $scope) {
-            $http({
-                method: 'GET',
-                url: 'api/demouser'
-            }).then(function successCallback(res) {
-                $scope.data = res.data.message;
-            }, function errorCallback(res) {
-                $scope.error = res.status + ": " + res.data.statusText;
+                        $http.get('api/getCompany').then(function (response) {
+                $scope.data = response.data;
             });
-
             $scope.getCompany = function () {
                 var url = 'api/getCompany/'+$scope.options + "/" + $scope.searchText + "/" + $scope.country;
                 $http.get(url).then(function successCallback(res) {
                     $scope.data = res.data;
-                }, function errorCallback(res) {
-                $scope.error = res.status + ": " + res.data.statusText;
+                }, function errorCallback(response) {
+                    var test = angular.toJson(response.data, true);
+                    $scope.error = test;
             });
             };
 

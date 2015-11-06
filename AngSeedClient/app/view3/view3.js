@@ -16,7 +16,6 @@ angular.module('myApp.view3', ['ngRoute'])
 
             $scope.delete = function (username) {
                 $http.delete('api/admin/user/' + username).then(function () {
-                    alert(username);
                     });
             };
         });
